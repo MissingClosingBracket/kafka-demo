@@ -1,3 +1,7 @@
+//
+If first time running kafka, install zookeeper and kafka. 
+//
+
 First, go into the kafka-folder and run: 
 
     cd /Downloads/kafka_2.13-2.7.0
