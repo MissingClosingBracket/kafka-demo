@@ -1,5 +1,6 @@
 //
-If first time running kafka, install zookeeper and kafka. 
+If first time running kafka, install zookeeper and kafka.
+Also run "pip install kafka-python" 
 //
 
 First, go into the kafka-folder and run: 
