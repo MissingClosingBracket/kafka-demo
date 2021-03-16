@@ -17,7 +17,8 @@ Now that the server is running, we can start up a consumer listening to a topic.
 Go into this directory 
     cd /repos/kafka-demo
 and run:
-    python3 consumer.py    
+    python3 consumer_1.py    
+    python3 consumer_2.py 
 Be aware, that prevois messages send on this topic will display. This can be changed in the consumer-class.
 
 Now, run a producer. 
