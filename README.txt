@@ -3,7 +3,7 @@ If first time running kafka, install zookeeper and kafka.
 Also run "pip install kafka-python" 
 //
 
-First, go into the kafka-folder and run: 
+First, go into the kafka-folder and run in seperate windows: 
 
     cd /Downloads/kafka_2.13-2.7.0
 
