@@ -3,10 +3,11 @@ import json
 
 if __name__ == "__main__":
     consumer = KafkaConsumer(
-        "registered_user",
+        "numerical",
         bootstrap_servers='0.0.0.0:9092',
         auto_offset_reset='earliest',
-        group_id="consumer-group-1")
-    print("starting the consumer")
+        group_id="numerical-1")
+    print("starting the consumer: numerical")
     for msg in consumer:
-        print("Registered User = {}".format(json.loads(msg.value)))
+        print("Numerical meesage = {}".format(json.loads(msg.value)))
+

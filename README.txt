@@ -14,12 +14,13 @@ This will start the zookeeper server
 
 
 
-Now that the server is running, we can start up a consumer listening to a topic.
+Now that the server is running, we can start up one or more consumers listening to topics.
 Go into this directory 
     cd /repos/kafka-demo
 and run:
-    python3 consumer_1.py    
-    python3 consumer_2.py 
+    python3 alphanumerical_consumer.py    
+    python3 time_consumer.py 
+    (...)
 Be aware, that prevois messages send on this topic will display. This can be changed in the consumer-class.
 
 Now, run a producer. 
@@ -28,3 +29,7 @@ Go into this directory
 and run:
     python3 producer.py    
 Be aware, that it will send a new message every 4 seconds.
+
+
+
+
