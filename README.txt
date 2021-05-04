@@ -28,7 +28,9 @@ Go into this directory
     cd /repos/kafka-demo
 and run:
     python3 producer.py    
-Be aware, that it will send a new message every 4 seconds.
+
+Now, enter message in console, like: "time 12:32:54"
+                                 or: "alphanumerical 1a2b3c4d"                           
 
 
 
