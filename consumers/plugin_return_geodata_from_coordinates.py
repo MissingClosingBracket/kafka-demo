@@ -3,11 +3,11 @@ import json
 
 if __name__ == "__main__":
     consumer = KafkaConsumer(
-        "rgb",
+        "geodata",
         bootstrap_servers='0.0.0.0:9092',
         auto_offset_reset='earliest',
-        group_id="rgb-1")
-    print("starting the consumer: rgb")
+        group_id="geodata-1")
+    print("starting the consumer: plugin_return_geodata_from_coordinates")
     for msg in consumer:
-        print("RGB message = {}".format(json.loads(msg.value)))
+        print("geodata message = {}".format(json.loads(msg.value)))
 

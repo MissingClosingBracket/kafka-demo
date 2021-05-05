@@ -3,11 +3,10 @@ import json
 
 if __name__ == "__main__":
     consumer = KafkaConsumer(
-        "numerical",
+        "all",
         bootstrap_servers='0.0.0.0:9092',
         auto_offset_reset='earliest',
-        group_id="numerical-1")
-    print("starting the consumer: numerical")
+        group_id="all-1")
+    print("starting the consumer: plugin_store_all_events")
     for msg in consumer:
-        print("Numerical meesage = {}".format(json.loads(msg.value)))
-
+        print("all message being stored = {}".format(json.loads(msg.value)))

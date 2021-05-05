@@ -1,2 +1,0 @@
- - Consumers can subscribe to same topic and both receive from same event. 
-    - However: they need unique ids/names.

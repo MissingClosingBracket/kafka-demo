@@ -15,6 +15,7 @@ if __name__ == "__main__":
         if (topic == "alphanumerical"):
             data = {"message": message}
             producer.send(topic, data)
+            producer.send("all",data)
 
         if (topic == "numerical"):
             data = {"message": message}
