@@ -10,10 +10,14 @@ def run():
         stub = mads_pb2_grpc.mads_serviceStub(channel)
         while True:
             try:
+                #Add a picture to the system:
                 response = stub.userCreateObject(mads_pb2.UserCreateObjectRequest(URI = "test_uri"))
                 print("I just received an object!")
                 print(response)
                 time.sleep(5)
+
+                #
+
             except KeyboardInterrupt:
                 print("KeyboardInterrupt")
                 channel.unsubscribe(close)

@@ -7,20 +7,30 @@ from concurrent import futures
 import threading
 import time
 
+
 #define function json_serializer and create kafka producer:
 def json_serializer(data):
     return json.dumps(data).encode("utf-8")
 
-#producer = KafkaProducer(bootstrap_servers=['0.0.0.0:9092'],
-                         #value_serializer=json_serializer)
+producer = KafkaProducer(bootstrap_servers=['0.0.0.0:9092'],
+                         value_serializer=json_serializer)
 
+#define different kafka events and topics:
+def kafka_event(topic, message):
+    producer.send(topic, message)
+    message["topic"] = topic
+    producer.send("all", message)
 
 #define gRPC calls:
 class Listener(mads_pb2_grpc.mads_serviceServicer):
+    
     def userCreateObject(self, request, context):
         uri = request.URI
         print("Server received: " + uri)
+        kafka_event("newObject",{"id":1,"uri":uri})
         return mads_pb2.UserCreateObjectResponse(object = mads_pb2.Object(id = 1, URI = uri))
+
+
 
 #define server:
 def serve():

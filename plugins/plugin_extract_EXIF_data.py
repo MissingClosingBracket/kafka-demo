@@ -5,11 +5,11 @@ all_events = []
 
 if __name__ == "__main__":
     consumer = KafkaConsumer(
-        "all",
+        "newObject",
         bootstrap_servers='0.0.0.0:9092',
         auto_offset_reset='earliest',
-        group_id="all-1")
-    print("starting the consumer: plugin_store_all_events")
+        group_id="exif-1")
+    print("starting the consumer: plugin_extract_EXIF_data")
     for msg in consumer:
-        print("all message being stored = {}".format(json.loads(msg.value)))
+        print("extracting EXIF data from image = {}".format(json.loads(msg.value)))
         all_events.append(msg)
