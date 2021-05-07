@@ -34,6 +34,10 @@
     python3 -m grpc_tools.protoc -I./Proto --python_out=. --grpc_python_out=. ./Proto/mads.proto
 //
 
+// The gRPC server (mads) is already running from above step. Now run the client
+    open the directory and run: python3 client.py 
+//
+
 
 
 
