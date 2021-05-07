@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+service mads_service {
+
+    //User creates object and gets a response:
+    rpc userCreateObject (UserCreateObjectRequest) returns (UserCreateObjectResponse);
+
+    //User retrieves object and gets a response:
+    //rpc userGetObject (UserGetObjectRequest) returns (UserGetObjectResponse);
+
+    //User creates a tag for an object and gets a response:
+    //rpc userCreateTag (UserCreateTagRequest) returns (UserCreateTagResponse);
+
+    //Plugin enriches with geodata
+    //rpc pluginCreateGeodata (PluginCreateGeodataRequest) returns (PluginCreateGeodataResponse);
+
+    //Plugin creates description automatically
+    //rpc pluginCreateDescription (PluginCreateDescriptionRequest) returns (PluginCreateDescriptionResponse);
+
+    //Plugin translates into native or English
+    //rpc pluginTranslateDescription (PluginTranslateDescriptionRequest) returns (PluginTranslateDescriptionResponse);
+
+    //Plugin extracts EXIF data and returns tagset
+    //rpc pluginExtractExifData (PluginExtractExifDataRequest) returns (PluginExtractExifDataResponse);
+}
+
+//Object:
+message Object {
+    int64 id = 1;
+    string URI = 2;
+}
+
+message UserCreateObjectRequest {
+    string URI = 1;
+}
+
+message UserCreateObjectResponse {
+    Object object = 1;
+}
+
