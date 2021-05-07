@@ -1,7 +1,6 @@
 from kafka import KafkaConsumer
 import json
 
-all_events = []
 
 if __name__ == "__main__":
     consumer = KafkaConsumer(
@@ -12,4 +11,3 @@ if __name__ == "__main__":
     print("starting the consumer: plugin_extract_EXIF_data")
     for msg in consumer:
         print("extracting EXIF data from image = {}".format(json.loads(msg.value)))
-        all_events.append(msg)

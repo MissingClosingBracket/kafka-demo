@@ -42,3 +42,8 @@
 
 
 
+//TODO:
+    Make gRPC procedure for EXIF data.
+    Make message type: tagSet? s
+    Implement gRPC stub in plugin_extract_EXIF_data.
+    
