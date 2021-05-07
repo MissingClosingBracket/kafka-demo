@@ -17,17 +17,17 @@ This will start the zookeeper server
 // Set up kafka producer and consumers (plugins)
 Now that the server is running, we can start up one or more consumers listening to topics.
 Go into this directory 
-    cd /repos/kafka-demo
+    cd /repos/kafka-demo/plugins
 and run:
     python3 <plugin>.py    
     (...)
 Be aware, that previous messages send on this topic will display. This can be changed in the consumer-classes.
 
-Now, run a producer. 
+Now, run a producer (mads). mads is both a gRPC server and a kafka producer. 
 Go into this directory 
-    cd /repos/kafka-demo
+    cd /repos/kafka-demo/mads/
 and run:
-    python3 producer.py    
+    python3 mads.py    
 //
 
 
