@@ -10,6 +10,9 @@ service mads_service {
 
     //Translate the automatically created description into user language
     rpc pluginTranslateDescription (PluginTranslateDescriptionRequest) returns (PluginTranslateDescriptionResponse);
+
+    //Extract EXIF data from a new object:
+    rpc pluginExtractExifData (PluginExtractExifDataRequest) returns (PluginExtractExifDataResponse);
 }
 
 //Object type::
@@ -32,7 +35,7 @@ message UserCreateObjectResponse {
     Object object = 1;
 }
 
-//Create automatic description
+//Create automatic description:
 message PluginCreateDescriptionRequest {
     int64 oid = 1;
     string URI = 2;
@@ -43,7 +46,7 @@ message PluginCreateDescriptionResponse {
     Tag tag = 1;
 }
 
-//Translate the automatically created description
+//Translate the automatically created description:
 message PluginTranslateDescriptionRequest {
     int64 oid = 1;
     string description = 2;
@@ -53,5 +56,16 @@ message PluginTranslateDescriptionResponse {
     Tag tag = 1;
 }
 
+//Extract EXIF data:
+message PluginExtractExifDataRequest {
+    int64 oid = 1;
+    string URI = 2;
+    float latitude = 3;
+    float longitude = 4;
+}
+
+message PluginExtractExifDataResponse {
+    Tag tag = 1;
+}
 
 

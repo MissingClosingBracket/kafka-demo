@@ -1,10 +1,13 @@
 // Setup first time
-    If first time running kafka, install zookeeper and kafka.
-    Also run "pip install kafka-python" 
+    If first time running kafka, install zookeeper and kafka. This project uses: kafka 2.13.2.7, zookeeper 3.6.2 and protobuf 3.13.
+    Also run: 
+    -pip install kafka-python
+    -grpcio
+    -grpcio-tools 
 //
 
 // Set up kafka:
-    First, go into the kafka-folder and run in seperate windows: 
+    First, go into the kafka-folder and run in seperate windows (choose your own directory): 
 
         cd /Downloads/kafka_2.13-2.7.0
 
@@ -15,37 +18,32 @@
 //
 
 // Set up kafka producer and consumers (plugins)
-    Now that the server is running, we can start up one or more consumers listening to topics.
-    Go into this directory 
-        cd /repos/kafka-demo/plugins
-    and run:
-        python3 <plugin>.py    
-        (...)
-    Be aware, that previous messages send on this topic will display. This can be changed in the consumer-classes.
-
     Now, run a producer (mads). mads is both a gRPC server and a kafka producer. 
     Go into this directory 
         cd /repos/kafka-demo/mads/
     and run:
-        python3 mads.py    
+        python3 mads.py  
+
+    Now that the servers are running, we can start up one or more consumers listening to topics.
+    Go into this directory 
+        cd /repos/kafka-demo
+    and run:
+        python3 <plugin>.py    
+        (...)
+    Be aware, that previous messages send on this topic will display. This can be changed in the consumer-classes.
+  
 //
 
 // The gRPC server (mads) is already running from above step. Now run the client
     open the directory and run: python3 client.py 
 //
 
-
-
-//compiling the .proto file:
+// Compiling the .proto file:
     python3 -m grpc_tools.protoc -I./Proto --python_out=. --grpc_python_out=. ./Proto/mads.proto
 //
 
-//deleting logs:
+// Deleting logs:
     rm -rf /tmp/kafka-logs /tmp/zookeeper
 //
 
-//TODO:
-    Make gRPC procedure for EXIF data.
-    Make message type: tagSet? s
-    Implement gRPC stub in plugin_extract_EXIF_data.
     

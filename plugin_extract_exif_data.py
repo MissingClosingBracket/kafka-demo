@@ -9,22 +9,22 @@ import mads_pb2_grpc
 if __name__ == "__main__":
 
     consumer = KafkaConsumer(
-        "event_auto_description_created",
+        "event_newObject",
         bootstrap_servers='0.0.0.0:9092',
         auto_offset_reset='latest',
-        group_id="translate-1")
-    print("Starting the consumer: plugin_translate_description")
+        group_id="exif-1")
+    print("Starting the consumer: plugin_extract_exif_data")
     for msg in consumer:
-        print("Translating descritpion for an automatically created description. The event had the message = {}".format(json.loads(msg.value)))
+        print("Extracting EXIF data from an object. The event had the message = {}".format(json.loads(msg.value)))
 
         with grpc.insecure_channel("localhost:9999") as channel:
             stub = mads_pb2_grpc.mads_serviceStub(channel)
             try:
                 objid = int(json.loads(msg.value)['oid'])
-                descr = str(json.loads(msg.value)['description'])
-                #crate translated description for object:
-                response = stub.pluginTranslateDescription(mads_pb2.PluginTranslateDescriptionRequest(oid = objid, description = "Tveir menn ganga í skóginum."))
-                print("I just received a response on translating a description: ")
+                uri = str(json.loads(msg.value)['uri'])
+                #extract exif data from object:
+                response = stub.pluginExtractExifData(mads_pb2.PluginExtractExifDataRequest(oid = objid, URI = uri, latitude = 2.34324, longitude = 23.02423))
+                print("I just received a response on extracting EXIF data from an object: ")
                 print(response)
                 channel.unsubscribe(channel.unsubscribe)
                 #
@@ -33,3 +33,4 @@ if __name__ == "__main__":
                 print("KeyboardInterrupt")
                 channel.unsubscribe(channel.unsubscribe)
                 exit()
+

@@ -29,6 +29,11 @@ class mads_serviceStub(object):
                 request_serializer=mads__pb2.PluginTranslateDescriptionRequest.SerializeToString,
                 response_deserializer=mads__pb2.PluginTranslateDescriptionResponse.FromString,
                 )
+        self.pluginExtractExifData = channel.unary_unary(
+                '/mads_service/pluginExtractExifData',
+                request_serializer=mads__pb2.PluginExtractExifDataRequest.SerializeToString,
+                response_deserializer=mads__pb2.PluginExtractExifDataResponse.FromString,
+                )
 
 
 class mads_serviceServicer(object):
@@ -55,6 +60,13 @@ class mads_serviceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def pluginExtractExifData(self, request, context):
+        """Extract EXIF data from a new object:
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_mads_serviceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -72,6 +84,11 @@ def add_mads_serviceServicer_to_server(servicer, server):
                     servicer.pluginTranslateDescription,
                     request_deserializer=mads__pb2.PluginTranslateDescriptionRequest.FromString,
                     response_serializer=mads__pb2.PluginTranslateDescriptionResponse.SerializeToString,
+            ),
+            'pluginExtractExifData': grpc.unary_unary_rpc_method_handler(
+                    servicer.pluginExtractExifData,
+                    request_deserializer=mads__pb2.PluginExtractExifDataRequest.FromString,
+                    response_serializer=mads__pb2.PluginExtractExifDataResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -131,5 +148,22 @@ class mads_service(object):
         return grpc.experimental.unary_unary(request, target, '/mads_service/pluginTranslateDescription',
             mads__pb2.PluginTranslateDescriptionRequest.SerializeToString,
             mads__pb2.PluginTranslateDescriptionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def pluginExtractExifData(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/mads_service/pluginExtractExifData',
+            mads__pb2.PluginExtractExifDataRequest.SerializeToString,
+            mads__pb2.PluginExtractExifDataResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
