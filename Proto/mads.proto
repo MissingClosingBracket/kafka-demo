@@ -13,6 +13,9 @@ service mads_service {
 
     //Extract EXIF data from a new object:
     rpc pluginExtractExifData (PluginExtractExifDataRequest) returns (PluginExtractExifDataResponse);
+
+    //Supply with geodata given EXIF data:
+    rpc pluginSupplyGeodata (PluginSupplyGeodataRequest) returns (PluginSupplyGeodataResponse);
 }
 
 //Object type::
@@ -68,4 +71,13 @@ message PluginExtractExifDataResponse {
     Tag tag = 1;
 }
 
+//Supply geodata from EXIF data:
+message PluginSupplyGeodataRequest {
+    int64 oid = 1;
+    string geodata = 2;
+}
+
+message PluginSupplyGeodataResponse {
+    Tag tag = 1;
+}
 

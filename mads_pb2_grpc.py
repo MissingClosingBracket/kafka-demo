@@ -34,6 +34,11 @@ class mads_serviceStub(object):
                 request_serializer=mads__pb2.PluginExtractExifDataRequest.SerializeToString,
                 response_deserializer=mads__pb2.PluginExtractExifDataResponse.FromString,
                 )
+        self.pluginSupplyGeodata = channel.unary_unary(
+                '/mads_service/pluginSupplyGeodata',
+                request_serializer=mads__pb2.PluginSupplyGeodataRequest.SerializeToString,
+                response_deserializer=mads__pb2.PluginSupplyGeodataResponse.FromString,
+                )
 
 
 class mads_serviceServicer(object):
@@ -67,6 +72,13 @@ class mads_serviceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def pluginSupplyGeodata(self, request, context):
+        """Supply with geodata given EXIF data:
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_mads_serviceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -89,6 +101,11 @@ def add_mads_serviceServicer_to_server(servicer, server):
                     servicer.pluginExtractExifData,
                     request_deserializer=mads__pb2.PluginExtractExifDataRequest.FromString,
                     response_serializer=mads__pb2.PluginExtractExifDataResponse.SerializeToString,
+            ),
+            'pluginSupplyGeodata': grpc.unary_unary_rpc_method_handler(
+                    servicer.pluginSupplyGeodata,
+                    request_deserializer=mads__pb2.PluginSupplyGeodataRequest.FromString,
+                    response_serializer=mads__pb2.PluginSupplyGeodataResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -165,5 +182,22 @@ class mads_service(object):
         return grpc.experimental.unary_unary(request, target, '/mads_service/pluginExtractExifData',
             mads__pb2.PluginExtractExifDataRequest.SerializeToString,
             mads__pb2.PluginExtractExifDataResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def pluginSupplyGeodata(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/mads_service/pluginSupplyGeodata',
+            mads__pb2.PluginSupplyGeodataRequest.SerializeToString,
+            mads__pb2.PluginSupplyGeodataResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

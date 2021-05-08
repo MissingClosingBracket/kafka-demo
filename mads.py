@@ -64,7 +64,7 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
         kafka_event("event_auto_description_created", {"oid":oid, "tid":tid, "description":descr})
         return mads_pb2.PluginCreateDescriptionResponse(tag = mads_pb2.Tag(tid = tid))
 
-    #the plugin for translating an automatically created description into the language of the user.
+    #the plugin for translating an automatically created description into the language of the user when reading the event: event_auto_description_created.
     def pluginTranslateDescription(self, request, context):
         oid = request.oid
         descr = request.description
@@ -86,9 +86,20 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
         tid = len(tag_table)
         tag_table[tid] = tsid
         exif_tag_table[tid] = [lat,lon]
-        print(exif_tag_table[tid])
         kafka_event("event_exif_data_extracted", {"oid":oid, "tid":tid, "latitude":lat, "longitude":lon})
         return mads_pb2.PluginExtractExifDataResponse(tag = mads_pb2.Tag(tid = tid))
+
+    #the plugin that supplies additional geodate when reading event: event_exif_data_extracted.
+    def pluginSupplyGeodata(self, request, context):
+        oid = request.oid
+        geodata = request.geodata
+        print("Server received additional geodata for the object: oid = " + str(oid) + ". The geodata received is: " + geodata)    
+        tsid = tag_set_table[oid]
+        tid = len(tag_table)
+        tag_table[tid] = tsid
+        geodata_tag_table[tid] = geodata
+        kafka_event("event_geodata_supplied", {"oid":oid, "tid":tid, "geodata":geodata})
+        return mads_pb2.PluginSupplyGeodataResponse(tag = mads_pb2.Tag(tid = tid))
 
 #define server:
 def serve():
@@ -99,7 +110,7 @@ def serve():
     try:
         while True:
             print("Server Running : threadcount %i" % (threading.active_count()))
-            time.sleep(10)
+            time.sleep(30)
     except KeyboardInterrupt:
         print("KeyboardInterrupt")
         server.stop(0)
