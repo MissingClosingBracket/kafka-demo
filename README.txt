@@ -36,6 +36,10 @@
 
 // The gRPC server (mads) is already running from above step. Now run the client
     open the directory and run: python3 client.py 
+
+    OBS: the clients takes arguments in console to simulate interaction:
+     - "new_object" adds new new_object
+     - "tags <int>" returns all tags associated with the objectid<int>
 //
 
 // Compiling the .proto file:

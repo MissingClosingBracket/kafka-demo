@@ -22,7 +22,7 @@ tag_table = {}                           #(tid, tsid)        example: (23, 2)   
 exif_tag_table = {}                      #(tid, coord)       example: (23, "12.3433535, 34.3429385")                        (int, varchar)
 description_tag_table = {}               #(tid, descr)       example: (24, "Three people in the woods") (auto-generated)    (int, varchar)
 translated_description_tag_table = {}    #(tid, descr)       example: (24, "Tveir menn ganga í skóginum.") (auto-generated) (int, varchar)
-geodata_tag_table = {}                   #(tid, descr)       example: (25, "Vexö, Sverige. Malleby Forest.")                (int, varchar)
+geodata_tag_table = {}                   #(tid, geodata)     example: (25, "Vexö, Sverige. Malleby Forest.")                (int, varchar)
 
 #entries in database:
 object_table[0] = 0
@@ -36,6 +36,15 @@ def kafka_event(topic, message):
     producer.send(topic, message)
     message["topic"] = topic
     producer.send("event_all", message)
+
+#get tags bu object id:
+def getTagsByOID(oid):
+    lst = []
+    tsid = tag_set_table[oid]
+    for key, value in tag_table.items():
+        if  value == tsid:
+            lst.append(key)
+    return lst
 
 #define gRPC calls:
 class Listener(mads_pb2_grpc.mads_serviceServicer):
@@ -100,6 +109,14 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
         geodata_tag_table[tid] = geodata
         kafka_event("event_geodata_supplied", {"oid":oid, "tid":tid, "geodata":geodata})
         return mads_pb2.PluginSupplyGeodataResponse(tag = mads_pb2.Tag(tid = tid))
+
+    #the user/program wants to retrieve all tags associated with an object:
+    def userRequestsTagsForObject(self, request, context):
+        oid = request.oid
+        print("Server received a request for giving the client all tags associated with the object: oid = " + str(oid) + ".")
+        tags = getTagsByOID(oid)
+        for t in tags:
+            yield mads_pb2.UserRequestsTagsForObjectResponse(tag = mads_pb2.Tag(tid = t))
 
 #define server:
 def serve():

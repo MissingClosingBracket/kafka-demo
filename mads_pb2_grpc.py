@@ -39,6 +39,11 @@ class mads_serviceStub(object):
                 request_serializer=mads__pb2.PluginSupplyGeodataRequest.SerializeToString,
                 response_deserializer=mads__pb2.PluginSupplyGeodataResponse.FromString,
                 )
+        self.userRequestsTagsForObject = channel.unary_stream(
+                '/mads_service/userRequestsTagsForObject',
+                request_serializer=mads__pb2.UserRequestsTagsForObjectRequest.SerializeToString,
+                response_deserializer=mads__pb2.UserRequestsTagsForObjectResponse.FromString,
+                )
 
 
 class mads_serviceServicer(object):
@@ -79,6 +84,13 @@ class mads_serviceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def userRequestsTagsForObject(self, request, context):
+        """User wants all tags for an object:
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_mads_serviceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -106,6 +118,11 @@ def add_mads_serviceServicer_to_server(servicer, server):
                     servicer.pluginSupplyGeodata,
                     request_deserializer=mads__pb2.PluginSupplyGeodataRequest.FromString,
                     response_serializer=mads__pb2.PluginSupplyGeodataResponse.SerializeToString,
+            ),
+            'userRequestsTagsForObject': grpc.unary_stream_rpc_method_handler(
+                    servicer.userRequestsTagsForObject,
+                    request_deserializer=mads__pb2.UserRequestsTagsForObjectRequest.FromString,
+                    response_serializer=mads__pb2.UserRequestsTagsForObjectResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -199,5 +216,22 @@ class mads_service(object):
         return grpc.experimental.unary_unary(request, target, '/mads_service/pluginSupplyGeodata',
             mads__pb2.PluginSupplyGeodataRequest.SerializeToString,
             mads__pb2.PluginSupplyGeodataResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def userRequestsTagsForObject(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/mads_service/userRequestsTagsForObject',
+            mads__pb2.UserRequestsTagsForObjectRequest.SerializeToString,
+            mads__pb2.UserRequestsTagsForObjectResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

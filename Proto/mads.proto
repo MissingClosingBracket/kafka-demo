@@ -16,6 +16,9 @@ service mads_service {
 
     //Supply with geodata given EXIF data:
     rpc pluginSupplyGeodata (PluginSupplyGeodataRequest) returns (PluginSupplyGeodataResponse);
+
+    //User wants all tags for an object:
+    rpc userRequestsTagsForObject (UserRequestsTagsForObjectRequest) returns (stream UserRequestsTagsForObjectResponse);
 }
 
 //Object type::
@@ -81,3 +84,11 @@ message PluginSupplyGeodataResponse {
     Tag tag = 1;
 }
 
+//User/program wants all tags associated with an object
+message UserRequestsTagsForObjectRequest {
+    int64 oid = 1;
+}
+
+message UserRequestsTagsForObjectResponse {
+    Tag tag = 1;
+}
