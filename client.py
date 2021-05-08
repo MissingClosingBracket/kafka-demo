@@ -8,20 +8,18 @@ import time
 def run():
     with grpc.insecure_channel("localhost:9999") as channel:
         stub = mads_pb2_grpc.mads_serviceStub(channel)
-        while True:
-            try:
-                #Add a picture to the system:
-                response = stub.userCreateObject(mads_pb2.UserCreateObjectRequest(URI = "test_uri"))
-                print("I just received an object!")
-                print(response)
-                time.sleep(5)
+        try:
+            #Add a picture to the system:
+            response = stub.userCreateObject(mads_pb2.UserCreateObjectRequest(URI = "test_uri"))
+            print("I just received a response on adding an object to the system: (object) =")
+            print(response)
+            channel.unsubscribe(close)
+            #
 
-                #
-
-            except KeyboardInterrupt:
-                print("KeyboardInterrupt")
-                channel.unsubscribe(close)
-                exit()
+        except KeyboardInterrupt:
+            print("KeyboardInterrupt")
+            channel.unsubscribe(close)
+            exit()
 
 
 def close(channel):

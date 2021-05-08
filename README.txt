@@ -30,17 +30,19 @@
         python3 mads.py    
 //
 
-//compiling the .proto file:
-    python3 -m grpc_tools.protoc -I./Proto --python_out=. --grpc_python_out=. ./Proto/mads.proto
-//
-
 // The gRPC server (mads) is already running from above step. Now run the client
     open the directory and run: python3 client.py 
 //
 
 
 
+//compiling the .proto file:
+    python3 -m grpc_tools.protoc -I./Proto --python_out=. --grpc_python_out=. ./Proto/mads.proto
+//
 
+//deleting logs:
+    rm -rf /tmp/kafka-logs /tmp/zookeeper
+//
 
 //TODO:
     Make gRPC procedure for EXIF data.

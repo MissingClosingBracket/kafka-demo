@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\nmads.proto\"!\n\x06Object\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x0b\n\x03URI\x18\x02 \x01(\t\"&\n\x17UserCreateObjectRequest\x12\x0b\n\x03URI\x18\x01 \x01(\t\"3\n\x18UserCreateObjectResponse\x12\x17\n\x06object\x18\x01 \x01(\x0b\x32\x07.Object2W\n\x0cmads_service\x12G\n\x10userCreateObject\x12\x18.UserCreateObjectRequest\x1a\x19.UserCreateObjectResponseb\x06proto3'
+  serialized_pb=b'\n\nmads.proto\"\"\n\x06Object\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0b\n\x03URI\x18\x02 \x01(\t\"&\n\x17UserCreateObjectRequest\x12\x0b\n\x03URI\x18\x01 \x01(\t\"3\n\x18UserCreateObjectResponse\x12\x17\n\x06object\x18\x01 \x01(\x0b\x32\x07.Object\"\x12\n\x03Tag\x12\x0b\n\x03tid\x18\x01 \x01(\x03\"O\n\x1ePluginCreateDescriptionRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0b\n\x03URI\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\"4\n\x1fPluginCreateDescriptionResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag2\xb5\x01\n\x0cmads_service\x12G\n\x10userCreateObject\x12\x18.UserCreateObjectRequest\x1a\x19.UserCreateObjectResponse\x12\\\n\x17pluginCreateDescription\x12\x1f.PluginCreateDescriptionRequest\x1a .PluginCreateDescriptionResponseb\x06proto3'
 )
 
 
@@ -34,7 +34,7 @@ _OBJECT = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='Object.id', index=0,
+      name='oid', full_name='Object.oid', index=0,
       number=1, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -60,7 +60,7 @@ _OBJECT = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=14,
-  serialized_end=47,
+  serialized_end=48,
 )
 
 
@@ -91,8 +91,8 @@ _USERCREATEOBJECTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=49,
-  serialized_end=87,
+  serialized_start=50,
+  serialized_end=88,
 )
 
 
@@ -123,14 +123,128 @@ _USERCREATEOBJECTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=89,
-  serialized_end=140,
+  serialized_start=90,
+  serialized_end=141,
+)
+
+
+_TAG = _descriptor.Descriptor(
+  name='Tag',
+  full_name='Tag',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='tid', full_name='Tag.tid', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=143,
+  serialized_end=161,
+)
+
+
+_PLUGINCREATEDESCRIPTIONREQUEST = _descriptor.Descriptor(
+  name='PluginCreateDescriptionRequest',
+  full_name='PluginCreateDescriptionRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='oid', full_name='PluginCreateDescriptionRequest.oid', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='URI', full_name='PluginCreateDescriptionRequest.URI', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='description', full_name='PluginCreateDescriptionRequest.description', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=163,
+  serialized_end=242,
+)
+
+
+_PLUGINCREATEDESCRIPTIONRESPONSE = _descriptor.Descriptor(
+  name='PluginCreateDescriptionResponse',
+  full_name='PluginCreateDescriptionResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='tag', full_name='PluginCreateDescriptionResponse.tag', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=244,
+  serialized_end=296,
 )
 
 _USERCREATEOBJECTRESPONSE.fields_by_name['object'].message_type = _OBJECT
+_PLUGINCREATEDESCRIPTIONRESPONSE.fields_by_name['tag'].message_type = _TAG
 DESCRIPTOR.message_types_by_name['Object'] = _OBJECT
 DESCRIPTOR.message_types_by_name['UserCreateObjectRequest'] = _USERCREATEOBJECTREQUEST
 DESCRIPTOR.message_types_by_name['UserCreateObjectResponse'] = _USERCREATEOBJECTRESPONSE
+DESCRIPTOR.message_types_by_name['Tag'] = _TAG
+DESCRIPTOR.message_types_by_name['PluginCreateDescriptionRequest'] = _PLUGINCREATEDESCRIPTIONREQUEST
+DESCRIPTOR.message_types_by_name['PluginCreateDescriptionResponse'] = _PLUGINCREATEDESCRIPTIONRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Object = _reflection.GeneratedProtocolMessageType('Object', (_message.Message,), {
@@ -154,6 +268,27 @@ UserCreateObjectResponse = _reflection.GeneratedProtocolMessageType('UserCreateO
   })
 _sym_db.RegisterMessage(UserCreateObjectResponse)
 
+Tag = _reflection.GeneratedProtocolMessageType('Tag', (_message.Message,), {
+  'DESCRIPTOR' : _TAG,
+  '__module__' : 'mads_pb2'
+  # @@protoc_insertion_point(class_scope:Tag)
+  })
+_sym_db.RegisterMessage(Tag)
+
+PluginCreateDescriptionRequest = _reflection.GeneratedProtocolMessageType('PluginCreateDescriptionRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PLUGINCREATEDESCRIPTIONREQUEST,
+  '__module__' : 'mads_pb2'
+  # @@protoc_insertion_point(class_scope:PluginCreateDescriptionRequest)
+  })
+_sym_db.RegisterMessage(PluginCreateDescriptionRequest)
+
+PluginCreateDescriptionResponse = _reflection.GeneratedProtocolMessageType('PluginCreateDescriptionResponse', (_message.Message,), {
+  'DESCRIPTOR' : _PLUGINCREATEDESCRIPTIONRESPONSE,
+  '__module__' : 'mads_pb2'
+  # @@protoc_insertion_point(class_scope:PluginCreateDescriptionResponse)
+  })
+_sym_db.RegisterMessage(PluginCreateDescriptionResponse)
+
 
 
 _MADS_SERVICE = _descriptor.ServiceDescriptor(
@@ -163,8 +298,8 @@ _MADS_SERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=142,
-  serialized_end=229,
+  serialized_start=299,
+  serialized_end=480,
   methods=[
   _descriptor.MethodDescriptor(
     name='userCreateObject',
@@ -173,6 +308,16 @@ _MADS_SERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_USERCREATEOBJECTREQUEST,
     output_type=_USERCREATEOBJECTRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='pluginCreateDescription',
+    full_name='mads_service.pluginCreateDescription',
+    index=1,
+    containing_service=None,
+    input_type=_PLUGINCREATEDESCRIPTIONREQUEST,
+    output_type=_PLUGINCREATEDESCRIPTIONRESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
