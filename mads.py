@@ -16,12 +16,13 @@ producer = KafkaProducer(bootstrap_servers=['0.0.0.0:9092'],
                          value_serializer=json_serializer)
 
 #initialize database representation:
-object_table = {}           #(oid, uri)         example: (1, "google.com/images/search=iceland+snow,top=1") (int, varchar)
-tag_set_table = {}          #(oid, tsid)        example: (1,2)                                              (int, int)
-tag_table = {}              #(tid, tsid)        example: (23, 2)                                            (int, int)
-exif_tag_table = {}         #(tid, coord)       example: (23, "12.3433535, 34.3429385")                     (int, varchar)
-description_tag_table = {}  #(tid, descr)       example: (24, "Three people in the woods") (auto-generated) (int, varchar)
-geodata_tag_table = {}      #(tid, descr)       example: (25, "Vexö, Sverige. Malleby Forest.")             (int, varchar)
+object_table = {}                        #(oid, uri)         example: (1, "google.com/images/search=iceland+snow,top=1") (int, varchar)
+tag_set_table = {}                       #(oid, tsid)        example: (1,2)                                              (int, int)
+tag_table = {}                           #(tid, tsid)        example: (23, 2)                                            (int, int)
+exif_tag_table = {}                      #(tid, coord)       example: (23, "12.3433535, 34.3429385")                     (int, varchar)
+description_tag_table = {}               #(tid, descr)       example: (24, "Three people in the woods") (auto-generated) (int, varchar)
+translated_description_tag_table = {}    #(tid, descr)       example: (24, "Three people in the woods") (auto-generated) (int, varchar)
+geodata_tag_table = {}                   #(tid, descr)       example: (25, "Vexö, Sverige. Malleby Forest.")             (int, varchar)
 
 #entries in database:
 object_table[0] = 0
@@ -50,7 +51,7 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
         kafka_event("event_newObject",{"oid":oid,"uri":uri})
         return mads_pb2.UserCreateObjectResponse(object = mads_pb2.Object(oid = oid, URI = uri))
 
-    #the plugin for EXIF returns oid, lat and lon.     
+    #the plugin for automatically creating a description to an object.     
     def pluginCreateDescription(self, request, context):
         oid = request.oid
         uri = request.URI
@@ -60,8 +61,20 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
         tid = len(tag_table) 
         tag_table[tid] = tsid
         description_tag_table[tid] = descr
-        kafka_event("event_auto_description_created", {"oid":oid, "tid":tid})
+        kafka_event("event_auto_description_created", {"oid":oid, "tid":tid, "description":descr})
         return mads_pb2.PluginCreateDescriptionResponse(tag = mads_pb2.Tag(tid = tid))
+
+    #the plugin for translating an automatically created description into the language of the user.
+    def pluginTranslateDescription(self, request, context):
+        oid = request.oid
+        descr = request.description
+        print("Server received a translated description for the object: oid = " + str(oid) + ". The translated description is: " + descr) 
+        tsid = tag_set_table[oid]
+        tid = len(tag_table)
+        tag_table[tid] = tsid
+        translated_description_tag_table[tid] = descr
+        kafka_event("event_translated_auto_description", {"oid":oid, "tid":tid, "description":descr})
+        return mads_pb2.PluginTranslateDescriptionResponse(tag = mads_pb2.Tag(tid = tid))
 
 #define server:
 def serve():

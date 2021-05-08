@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\nmads.proto\"\"\n\x06Object\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0b\n\x03URI\x18\x02 \x01(\t\"&\n\x17UserCreateObjectRequest\x12\x0b\n\x03URI\x18\x01 \x01(\t\"3\n\x18UserCreateObjectResponse\x12\x17\n\x06object\x18\x01 \x01(\x0b\x32\x07.Object\"\x12\n\x03Tag\x12\x0b\n\x03tid\x18\x01 \x01(\x03\"O\n\x1ePluginCreateDescriptionRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0b\n\x03URI\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\"4\n\x1fPluginCreateDescriptionResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag2\xb5\x01\n\x0cmads_service\x12G\n\x10userCreateObject\x12\x18.UserCreateObjectRequest\x1a\x19.UserCreateObjectResponse\x12\\\n\x17pluginCreateDescription\x12\x1f.PluginCreateDescriptionRequest\x1a .PluginCreateDescriptionResponseb\x06proto3'
+  serialized_pb=b'\n\nmads.proto\"\"\n\x06Object\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0b\n\x03URI\x18\x02 \x01(\t\"\x12\n\x03Tag\x12\x0b\n\x03tid\x18\x01 \x01(\x03\"&\n\x17UserCreateObjectRequest\x12\x0b\n\x03URI\x18\x01 \x01(\t\"3\n\x18UserCreateObjectResponse\x12\x17\n\x06object\x18\x01 \x01(\x0b\x32\x07.Object\"O\n\x1ePluginCreateDescriptionRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0b\n\x03URI\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\"4\n\x1fPluginCreateDescriptionResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\"E\n!PluginTranslateDescriptionRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\"7\n\"PluginTranslateDescriptionResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag2\x9c\x02\n\x0cmads_service\x12G\n\x10userCreateObject\x12\x18.UserCreateObjectRequest\x1a\x19.UserCreateObjectResponse\x12\\\n\x17pluginCreateDescription\x12\x1f.PluginCreateDescriptionRequest\x1a .PluginCreateDescriptionResponse\x12\x65\n\x1apluginTranslateDescription\x12\".PluginTranslateDescriptionRequest\x1a#.PluginTranslateDescriptionResponseb\x06proto3'
 )
 
 
@@ -64,6 +64,38 @@ _OBJECT = _descriptor.Descriptor(
 )
 
 
+_TAG = _descriptor.Descriptor(
+  name='Tag',
+  full_name='Tag',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='tid', full_name='Tag.tid', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=50,
+  serialized_end=68,
+)
+
+
 _USERCREATEOBJECTREQUEST = _descriptor.Descriptor(
   name='UserCreateObjectRequest',
   full_name='UserCreateObjectRequest',
@@ -91,8 +123,8 @@ _USERCREATEOBJECTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=50,
-  serialized_end=88,
+  serialized_start=70,
+  serialized_end=108,
 )
 
 
@@ -123,39 +155,7 @@ _USERCREATEOBJECTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=90,
-  serialized_end=141,
-)
-
-
-_TAG = _descriptor.Descriptor(
-  name='Tag',
-  full_name='Tag',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='tid', full_name='Tag.tid', index=0,
-      number=1, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=143,
+  serialized_start=110,
   serialized_end=161,
 )
 
@@ -237,14 +237,88 @@ _PLUGINCREATEDESCRIPTIONRESPONSE = _descriptor.Descriptor(
   serialized_end=296,
 )
 
+
+_PLUGINTRANSLATEDESCRIPTIONREQUEST = _descriptor.Descriptor(
+  name='PluginTranslateDescriptionRequest',
+  full_name='PluginTranslateDescriptionRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='oid', full_name='PluginTranslateDescriptionRequest.oid', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='description', full_name='PluginTranslateDescriptionRequest.description', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=298,
+  serialized_end=367,
+)
+
+
+_PLUGINTRANSLATEDESCRIPTIONRESPONSE = _descriptor.Descriptor(
+  name='PluginTranslateDescriptionResponse',
+  full_name='PluginTranslateDescriptionResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='tag', full_name='PluginTranslateDescriptionResponse.tag', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=369,
+  serialized_end=424,
+)
+
 _USERCREATEOBJECTRESPONSE.fields_by_name['object'].message_type = _OBJECT
 _PLUGINCREATEDESCRIPTIONRESPONSE.fields_by_name['tag'].message_type = _TAG
+_PLUGINTRANSLATEDESCRIPTIONRESPONSE.fields_by_name['tag'].message_type = _TAG
 DESCRIPTOR.message_types_by_name['Object'] = _OBJECT
+DESCRIPTOR.message_types_by_name['Tag'] = _TAG
 DESCRIPTOR.message_types_by_name['UserCreateObjectRequest'] = _USERCREATEOBJECTREQUEST
 DESCRIPTOR.message_types_by_name['UserCreateObjectResponse'] = _USERCREATEOBJECTRESPONSE
-DESCRIPTOR.message_types_by_name['Tag'] = _TAG
 DESCRIPTOR.message_types_by_name['PluginCreateDescriptionRequest'] = _PLUGINCREATEDESCRIPTIONREQUEST
 DESCRIPTOR.message_types_by_name['PluginCreateDescriptionResponse'] = _PLUGINCREATEDESCRIPTIONRESPONSE
+DESCRIPTOR.message_types_by_name['PluginTranslateDescriptionRequest'] = _PLUGINTRANSLATEDESCRIPTIONREQUEST
+DESCRIPTOR.message_types_by_name['PluginTranslateDescriptionResponse'] = _PLUGINTRANSLATEDESCRIPTIONRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Object = _reflection.GeneratedProtocolMessageType('Object', (_message.Message,), {
@@ -253,6 +327,13 @@ Object = _reflection.GeneratedProtocolMessageType('Object', (_message.Message,),
   # @@protoc_insertion_point(class_scope:Object)
   })
 _sym_db.RegisterMessage(Object)
+
+Tag = _reflection.GeneratedProtocolMessageType('Tag', (_message.Message,), {
+  'DESCRIPTOR' : _TAG,
+  '__module__' : 'mads_pb2'
+  # @@protoc_insertion_point(class_scope:Tag)
+  })
+_sym_db.RegisterMessage(Tag)
 
 UserCreateObjectRequest = _reflection.GeneratedProtocolMessageType('UserCreateObjectRequest', (_message.Message,), {
   'DESCRIPTOR' : _USERCREATEOBJECTREQUEST,
@@ -268,13 +349,6 @@ UserCreateObjectResponse = _reflection.GeneratedProtocolMessageType('UserCreateO
   })
 _sym_db.RegisterMessage(UserCreateObjectResponse)
 
-Tag = _reflection.GeneratedProtocolMessageType('Tag', (_message.Message,), {
-  'DESCRIPTOR' : _TAG,
-  '__module__' : 'mads_pb2'
-  # @@protoc_insertion_point(class_scope:Tag)
-  })
-_sym_db.RegisterMessage(Tag)
-
 PluginCreateDescriptionRequest = _reflection.GeneratedProtocolMessageType('PluginCreateDescriptionRequest', (_message.Message,), {
   'DESCRIPTOR' : _PLUGINCREATEDESCRIPTIONREQUEST,
   '__module__' : 'mads_pb2'
@@ -289,6 +363,20 @@ PluginCreateDescriptionResponse = _reflection.GeneratedProtocolMessageType('Plug
   })
 _sym_db.RegisterMessage(PluginCreateDescriptionResponse)
 
+PluginTranslateDescriptionRequest = _reflection.GeneratedProtocolMessageType('PluginTranslateDescriptionRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PLUGINTRANSLATEDESCRIPTIONREQUEST,
+  '__module__' : 'mads_pb2'
+  # @@protoc_insertion_point(class_scope:PluginTranslateDescriptionRequest)
+  })
+_sym_db.RegisterMessage(PluginTranslateDescriptionRequest)
+
+PluginTranslateDescriptionResponse = _reflection.GeneratedProtocolMessageType('PluginTranslateDescriptionResponse', (_message.Message,), {
+  'DESCRIPTOR' : _PLUGINTRANSLATEDESCRIPTIONRESPONSE,
+  '__module__' : 'mads_pb2'
+  # @@protoc_insertion_point(class_scope:PluginTranslateDescriptionResponse)
+  })
+_sym_db.RegisterMessage(PluginTranslateDescriptionResponse)
+
 
 
 _MADS_SERVICE = _descriptor.ServiceDescriptor(
@@ -298,8 +386,8 @@ _MADS_SERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=299,
-  serialized_end=480,
+  serialized_start=427,
+  serialized_end=711,
   methods=[
   _descriptor.MethodDescriptor(
     name='userCreateObject',
@@ -318,6 +406,16 @@ _MADS_SERVICE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_PLUGINCREATEDESCRIPTIONREQUEST,
     output_type=_PLUGINCREATEDESCRIPTIONRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='pluginTranslateDescription',
+    full_name='mads_service.pluginTranslateDescription',
+    index=2,
+    containing_service=None,
+    input_type=_PLUGINTRANSLATEDESCRIPTIONREQUEST,
+    output_type=_PLUGINTRANSLATEDESCRIPTIONRESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),

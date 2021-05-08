@@ -9,13 +9,18 @@ service mads_service {
     rpc pluginCreateDescription (PluginCreateDescriptionRequest) returns (PluginCreateDescriptionResponse);
 
     //Translate the automatically created description into user language
-    rpc pluginTranslateDescription (Request) returns (Response);
+    rpc pluginTranslateDescription (PluginTranslateDescriptionRequest) returns (PluginTranslateDescriptionResponse);
 }
 
 //Object type::
 message Object {
     int64 oid = 1;
     string URI = 2;
+}
+
+//Tag message:
+message Tag {
+    int64 tid = 1;
 }
 
 //Object create:
@@ -25,12 +30,6 @@ message UserCreateObjectRequest {
 
 message UserCreateObjectResponse {
     Object object = 1;
-}
-
-
-//Tag message:
-message Tag {
-    int64 tid = 1;
 }
 
 //Create automatic description
@@ -44,6 +43,15 @@ message PluginCreateDescriptionResponse {
     Tag tag = 1;
 }
 
+//Translate the automatically created description
+message PluginTranslateDescriptionRequest {
+    int64 oid = 1;
+    string description = 2;
+}
+
+message PluginTranslateDescriptionResponse {
+    Tag tag = 1;
+}
 
 
 
