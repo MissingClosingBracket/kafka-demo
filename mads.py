@@ -106,7 +106,7 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
         tag_table[tid] = ["exif", "(" + str(lat) + ", " + str(lon) + ")"]
         kafka_event("event_exif_data_extracted", {"oid":oid, "tid":tid, "latitude":lat, "longitude":lon})
         v = "(" + str(lat) + ", " + str(lon) + ")"
-        return mads_pb2.PluginExtractExifDataResponse(tag = mads_pb2.Tag(tid = tid, value = v, type = mads_pb2.TagType.EXIF))
+        return mads_pb2.PluginExtractExifDataResponse(tag = mads_pb2.Tag(tid = tid, value = v, type = mads_pb2.TagType.EXIFDATA))
 
     #the plugin that supplies additional geodate when reading event: event_exif_data_extracted.
     def pluginSupplyGeodata(self, request, context):
@@ -125,6 +125,7 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
     #the user/program wants to retrieve all tags associated with an object:
     def userRequestsTagsForObject(self, request, context):
         oid = request.oid
+        kafka_event("user_requests_tags", {"oid":oid})
         print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
         print("Server received a request for giving the client all tags associated with the object: oid = " + str(oid) + ".")
         tags = getTagsByOID(oid)
@@ -136,8 +137,16 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
                 elem1 = tag_table[tagid][0]
                 elem2 = tag_table[tagid][1]
                 print("  --Server is returning: " + str(elem1) + ", " + str(elem2) + ".")
-                yield mads_pb2.UserRequestsTagsForObjectResponse(tag = mads_pb2.Tag(tid = tagid, value = str(elem2), type = mads_pb2.TagType.DESCR))
+                if (elem1=="geodata"):
+                    yield mads_pb2.UserRequestsTagsForObjectResponse(tag = mads_pb2.Tag(tid = tagid, value = str(elem2), type = mads_pb2.TagType.GEODATA))
+                elif (elem1=="exif"):
+                    yield mads_pb2.UserRequestsTagsForObjectResponse(tag = mads_pb2.Tag(tid = tagid, value = str(elem2), type = mads_pb2.TagType.EXIFDATA))
+                elif (elem1=="descr"):
+                    yield mads_pb2.UserRequestsTagsForObjectResponse(tag = mads_pb2.Tag(tid = tagid, value = str(elem2), type = mads_pb2.TagType.DESCR))
+                elif (elem1=="transl_descr"):
+                    yield mads_pb2.UserRequestsTagsForObjectResponse(tag = mads_pb2.Tag(tid = tagid, value = str(elem2), type = mads_pb2.TagType.TRANSL_DESCR))    
             print("")
+        
 #define server:
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\nmads.proto\"\"\n\x06Object\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0b\n\x03URI\x18\x02 \x01(\t\"9\n\x03Tag\x12\x0b\n\x03tid\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\t\x12\x16\n\x04type\x18\x03 \x01(\x0e\x32\x08.TagType\"&\n\x17UserCreateObjectRequest\x12\x0b\n\x03URI\x18\x01 \x01(\t\"3\n\x18UserCreateObjectResponse\x12\x17\n\x06object\x18\x01 \x01(\x0b\x32\x07.Object\"O\n\x1ePluginCreateDescriptionRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0b\n\x03URI\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\"4\n\x1fPluginCreateDescriptionResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\"E\n!PluginTranslateDescriptionRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\"7\n\"PluginTranslateDescriptionResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\"]\n\x1cPluginExtractExifDataRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0b\n\x03URI\x18\x02 \x01(\t\x12\x10\n\x08latitude\x18\x03 \x01(\x02\x12\x11\n\tlongitude\x18\x04 \x01(\x02\"2\n\x1dPluginExtractExifDataResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\":\n\x1aPluginSupplyGeodataRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0f\n\x07geodata\x18\x02 \x01(\t\"0\n\x1bPluginSupplyGeodataResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\"/\n UserRequestsTagsForObjectRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\"6\n!UserRequestsTagsForObjectResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag*=\n\x07TagType\x12\x08\n\x04\x45XIF\x10\x00\x12\x0b\n\x07GEODATA\x10\x01\x12\t\n\x05\x44\x45SCR\x10\x02\x12\x10\n\x0cTRANSL_DESCR\x10\x03\x32\xac\x04\n\x0cmads_service\x12G\n\x10userCreateObject\x12\x18.UserCreateObjectRequest\x1a\x19.UserCreateObjectResponse\x12\\\n\x17pluginCreateDescription\x12\x1f.PluginCreateDescriptionRequest\x1a .PluginCreateDescriptionResponse\x12\x65\n\x1apluginTranslateDescription\x12\".PluginTranslateDescriptionRequest\x1a#.PluginTranslateDescriptionResponse\x12V\n\x15pluginExtractExifData\x12\x1d.PluginExtractExifDataRequest\x1a\x1e.PluginExtractExifDataResponse\x12P\n\x13pluginSupplyGeodata\x12\x1b.PluginSupplyGeodataRequest\x1a\x1c.PluginSupplyGeodataResponse\x12\x64\n\x19userRequestsTagsForObject\x12!.UserRequestsTagsForObjectRequest\x1a\".UserRequestsTagsForObjectResponse0\x01\x62\x06proto3'
+  serialized_pb=b'\n\nmads.proto\"\"\n\x06Object\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0b\n\x03URI\x18\x02 \x01(\t\"9\n\x03Tag\x12\x0b\n\x03tid\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\t\x12\x16\n\x04type\x18\x03 \x01(\x0e\x32\x08.TagType\"&\n\x17UserCreateObjectRequest\x12\x0b\n\x03URI\x18\x01 \x01(\t\"3\n\x18UserCreateObjectResponse\x12\x17\n\x06object\x18\x01 \x01(\x0b\x32\x07.Object\"O\n\x1ePluginCreateDescriptionRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0b\n\x03URI\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\"4\n\x1fPluginCreateDescriptionResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\"E\n!PluginTranslateDescriptionRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\"7\n\"PluginTranslateDescriptionResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\"]\n\x1cPluginExtractExifDataRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0b\n\x03URI\x18\x02 \x01(\t\x12\x10\n\x08latitude\x18\x03 \x01(\x02\x12\x11\n\tlongitude\x18\x04 \x01(\x02\"2\n\x1dPluginExtractExifDataResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\":\n\x1aPluginSupplyGeodataRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0f\n\x07geodata\x18\x02 \x01(\t\"0\n\x1bPluginSupplyGeodataResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\"/\n UserRequestsTagsForObjectRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\"6\n!UserRequestsTagsForObjectResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag*Q\n\x07TagType\x12\x0e\n\nNOT_IN_USE\x10\x00\x12\x0b\n\x07GEODATA\x10\x01\x12\t\n\x05\x44\x45SCR\x10\x02\x12\x10\n\x0cTRANSL_DESCR\x10\x03\x12\x0c\n\x08\x45XIFDATA\x10\x04\x32\xac\x04\n\x0cmads_service\x12G\n\x10userCreateObject\x12\x18.UserCreateObjectRequest\x1a\x19.UserCreateObjectResponse\x12\\\n\x17pluginCreateDescription\x12\x1f.PluginCreateDescriptionRequest\x1a .PluginCreateDescriptionResponse\x12\x65\n\x1apluginTranslateDescription\x12\".PluginTranslateDescriptionRequest\x1a#.PluginTranslateDescriptionResponse\x12V\n\x15pluginExtractExifData\x12\x1d.PluginExtractExifDataRequest\x1a\x1e.PluginExtractExifDataResponse\x12P\n\x13pluginSupplyGeodata\x12\x1b.PluginSupplyGeodataRequest\x1a\x1c.PluginSupplyGeodataResponse\x12\x64\n\x19userRequestsTagsForObject\x12!.UserRequestsTagsForObjectRequest\x1a\".UserRequestsTagsForObjectResponse0\x01\x62\x06proto3'
 )
 
 _TAGTYPE = _descriptor.EnumDescriptor(
@@ -31,7 +31,7 @@ _TAGTYPE = _descriptor.EnumDescriptor(
   create_key=_descriptor._internal_create_key,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='EXIF', index=0, number=0,
+      name='NOT_IN_USE', index=0, number=0,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
@@ -50,19 +50,25 @@ _TAGTYPE = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='EXIFDATA', index=4, number=4,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=827,
-  serialized_end=888,
+  serialized_end=908,
 )
 _sym_db.RegisterEnumDescriptor(_TAGTYPE)
 
 TagType = enum_type_wrapper.EnumTypeWrapper(_TAGTYPE)
-EXIF = 0
+NOT_IN_USE = 0
 GEODATA = 1
 DESCR = 2
 TRANSL_DESCR = 3
+EXIFDATA = 4
 
 
 
@@ -714,8 +720,8 @@ _MADS_SERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=891,
-  serialized_end=1447,
+  serialized_start=911,
+  serialized_end=1467,
   methods=[
   _descriptor.MethodDescriptor(
     name='userCreateObject',
