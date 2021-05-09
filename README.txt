@@ -38,9 +38,9 @@
     open the directory and run: python3 client.py 
 
     OBS: the clients takes arguments in console to simulate interaction:
-     - "new_object" adds new new_object
-     - "change_tag <int> <newvalue>" OBS: example: "change_tag 3 <En mand i skoven>" (<> are used for encapsuling the value)
-     - "get_tags <int>" returns all tags associated with the objectid<int>
+     - "new_object" adds new new_object                                     example: "new_object"
+     - "change_tag <int> <newvalue>"                                        example: "change_tag 3 <En mand i skoven>"
+     - "get_tags <int>" returns all tags associated with the objectid<int>  example: "get_tags 2"
 //
 
 // Compiling the .proto file:
