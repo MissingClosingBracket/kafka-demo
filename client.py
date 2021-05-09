@@ -30,12 +30,11 @@ def run():
                     oid = int(cl_in.split()[1])
                     print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
                     print("I just received a response on requesting for all tags associated with an object: oid = " + str(oid) + ".")
-                    counter = 0
                     for res in stub.userRequestsTagsForObject(mads_pb2.UserRequestsTagsForObjectRequest(oid = oid)):
-                        counter += 1
-                        print(res)
-                    if counter == 0:
-                        print("Something went wrong. Make sure the id represented.")    
+                        if (res.HasField("tag")):    
+                            print(res)
+                        else:
+                            print("Something went wrong. Make sure the id represented.")    
                     print("")    
                     channel.unsubscribe(close)
                     #

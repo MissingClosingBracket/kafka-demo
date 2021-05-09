@@ -125,14 +125,15 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
     #the user/program wants to retrieve all tags associated with an object:
     def userRequestsTagsForObject(self, request, context):
         oid = request.oid
-        kafka_event("user_requests_tags", {"oid":oid})
         print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
         print("Server received a request for giving the client all tags associated with the object: oid = " + str(oid) + ".")
         tags = getTagsByOID(oid)
         if (len(tags) == 0):
             print("  --Server has no tags to return because oid does not exist.")
+            yield mads_pb2.UserRequestsTagsForObjectResponse()
             print("")
         else:
+            kafka_event("user_requests_tags", {"oid":oid})
             for tagid in tags:
                 elem1 = tag_table[tagid][0]
                 elem2 = tag_table[tagid][1]
@@ -151,7 +152,6 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
     def userChangeTag(self, request, context):
         tid = request.tid
         new_value = request.value
-        kafka_event("user_changes_tag", {"tid":tid, "value": new_value})
         print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
         print("Server received a request for changing the tag = " + str(tid) + ".")
         if (tid >= len(tag_table) or tid <= 0):
@@ -159,6 +159,7 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
             print("")
             return mads_pb2.UserRequestsTagsForObjectResponse()
         else:    
+            kafka_event("user_changes_tag", {"tid":tid, "value": new_value})
             t = tag_table[tid]
             tagtype = t[0]  
             tag_table[tid] = [tagtype, new_value]
