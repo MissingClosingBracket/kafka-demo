@@ -23,8 +23,8 @@ if __name__ == "__main__":
             try:
                 objid = int(json.loads(msg.value)['oid'])
                 descr = str(json.loads(msg.value)['description'])
-                #crate translated description for object:
-                response = stub.pluginTranslateDescription(mads_pb2.PluginTranslateDescriptionRequest(oid = objid, description = "Tveir menn ganga í skóginum."))
+                #create translated description for object:
+                response = stub.pluginTranslateDescription(mads_pb2.PluginTranslateDescriptionRequest(oid = objid, description = "To personer i skoven."))
                 print("I just received a response on translating a description: ")
                 print(response)
                 print("")

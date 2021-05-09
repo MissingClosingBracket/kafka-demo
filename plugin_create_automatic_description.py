@@ -24,7 +24,7 @@ if __name__ == "__main__":
                 objid = int(json.loads(msg.value)['oid'])
                 uri = str(json.loads(msg.value)['uri'])
                 #crate description for object:
-                response = stub.pluginCreateDescription(mads_pb2.PluginCreateDescriptionRequest(oid = objid, URI = uri, description = "Two people walking in the woods."))
+                response = stub.pluginCreateDescription(mads_pb2.PluginCreateDescriptionRequest(oid = objid, URI = uri, description = "Two people in the woods."))
                 print("I just received a response on adding a description to an object: ")
                 print(response)
                 print("")

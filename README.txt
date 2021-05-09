@@ -39,7 +39,8 @@
 
     OBS: the clients takes arguments in console to simulate interaction:
      - "new_object" adds new new_object
-     - "tags <int>" returns all tags associated with the objectid<int>
+     - "change_tag <int> <newvalue>" OBS: example: "change_tag 3 <En mand i skoven>" (<> are used for encapsuling the value)
+     - "get_tags <int>" returns all tags associated with the objectid<int>
 //
 
 // Compiling the .proto file:

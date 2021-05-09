@@ -19,6 +19,9 @@ service mads_service {
 
     //User wants all tags for an object:
     rpc userRequestsTagsForObject (UserRequestsTagsForObjectRequest) returns (stream UserRequestsTagsForObjectResponse);
+
+    //User wants to change the value of a tag:
+    rpc userChangeTag (UserChangeTagRequest) returns (UserChangeTagResponse);
 }
 
 //Object type::
@@ -95,11 +98,21 @@ message PluginSupplyGeodataResponse {
     Tag tag = 1;
 }
 
-//User/program wants all tags associated with an object
+//User/program wants all tags associated with an object:
 message UserRequestsTagsForObjectRequest {
     int64 oid = 1;
 }
 
 message UserRequestsTagsForObjectResponse {
+    Tag tag = 1;
+}
+
+//User/program wants to change the value of a tag:
+message UserChangeTagRequest {
+    int64 tid = 1;
+    string value = 2;
+}
+
+message UserChangeTagResponse {
     Tag tag = 1;
 }

@@ -37,7 +37,7 @@ def kafka_event(topic, message):
 
 #get tags bu object id:
 def getTagsByOID(oid):
-    if oid >= len(object_table) or oid == 0:
+    if oid >= len(object_table) or oid <= 0:
         return []
     else:    
         lst = []
@@ -146,6 +146,32 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
                 elif (elem1=="transl_descr"):
                     yield mads_pb2.UserRequestsTagsForObjectResponse(tag = mads_pb2.Tag(tid = tagid, value = str(elem2), type = mads_pb2.TagType.TRANSL_DESCR))    
             print("")
+    
+    #the user/program wants to chnage the value of a tag:
+    def userChangeTag(self, request, context):
+        tid = request.tid
+        new_value = request.value
+        kafka_event("user_changes_tag", {"tid":tid, "value": new_value})
+        print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
+        print("Server received a request for changing the tag = " + str(tid) + ".")
+        if (tid >= len(tag_table) or tid <= 0):
+            print("  --Server has no tag to change - is the tag existing?")
+            print("")
+            return mads_pb2.UserRequestsTagsForObjectResponse()
+        else:    
+            t = tag_table[tid]
+            tagtype = t[0]  
+            tag_table[tid] = [tagtype, new_value]
+            print("  --Server is returning the updated tag: " + str(tid) + " = " + new_value)
+            if (tagtype=="geodata"):
+                return mads_pb2.UserRequestsTagsForObjectResponse(tag = mads_pb2.Tag(tid = tid, value = new_value, type = mads_pb2.TagType.GEODATA))
+            elif (tagtype=="exif"):
+                return mads_pb2.UserRequestsTagsForObjectResponse(tag = mads_pb2.Tag(tid = tid, value = new_value, type = mads_pb2.TagType.EXIFDATA))
+            elif (tagtype=="descr"):
+                return mads_pb2.UserRequestsTagsForObjectResponse(tag = mads_pb2.Tag(tid = tid, value = new_value, type = mads_pb2.TagType.DESCR))
+            elif (tagtype=="transl_descr"):
+                return mads_pb2.UserRequestsTagsForObjectResponse(tag = mads_pb2.Tag(tid = tid, value = new_value, type = mads_pb2.TagType.TRANSL_DESCR))        
+            print("")    
         
 #define server:
 def serve():
