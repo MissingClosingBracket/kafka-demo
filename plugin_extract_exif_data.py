@@ -15,6 +15,7 @@ if __name__ == "__main__":
         group_id="exif-1")
     print("Starting the consumer: plugin_extract_exif_data")
     for msg in consumer:
+        print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
         print("Extracting EXIF data from an object. The event had the message = {}".format(json.loads(msg.value)))
 
         with grpc.insecure_channel("localhost:9999") as channel:
@@ -26,6 +27,7 @@ if __name__ == "__main__":
                 response = stub.pluginExtractExifData(mads_pb2.PluginExtractExifDataRequest(oid = objid, URI = uri, latitude = 2.34324, longitude = 23.02423))
                 print("I just received a response on extracting EXIF data from an object: ")
                 print(response)
+                print("")
                 channel.unsubscribe(channel.unsubscribe)
                 #
 

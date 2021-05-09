@@ -14,8 +14,10 @@ def run():
                 try:
                     #Add a picture to the system:
                     response = stub.userCreateObject(mads_pb2.UserCreateObjectRequest(URI = "test_uri"))
+                    print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
                     print("I just received a response on adding an object to the system: (object) =")
                     print(response)
+                    print("")
                     channel.unsubscribe(close)
                     #
                 except KeyboardInterrupt:
@@ -26,9 +28,11 @@ def run():
                 try:
                     #Retrieve tags for an object:
                     oid = int(cl_in.split()[1])
+                    print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
                     print("I just received a response on requesting for all tags associated with an object: oid = " + str(oid) + ".")
                     for res in stub.userRequestsTagsForObject(mads_pb2.UserRequestsTagsForObjectRequest(oid = oid)):
                         print(res)
+                    print("")    
                     channel.unsubscribe(close)
                     #
                 except KeyboardInterrupt:

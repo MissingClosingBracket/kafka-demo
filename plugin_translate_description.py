@@ -15,6 +15,7 @@ if __name__ == "__main__":
         group_id="translate-1")
     print("Starting the consumer: plugin_translate_description")
     for msg in consumer:
+        print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
         print("Translating descritpion for an automatically created description. The event had the message = {}".format(json.loads(msg.value)))
 
         with grpc.insecure_channel("localhost:9999") as channel:
@@ -26,6 +27,7 @@ if __name__ == "__main__":
                 response = stub.pluginTranslateDescription(mads_pb2.PluginTranslateDescriptionRequest(oid = objid, description = "Tveir menn ganga í skóginum."))
                 print("I just received a response on translating a description: ")
                 print(response)
+                print("")
                 channel.unsubscribe(channel.unsubscribe)
                 #
 

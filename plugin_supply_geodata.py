@@ -15,6 +15,7 @@ if __name__ == "__main__":
         group_id="geodata-1")
     print("Starting the consumer: plugin_supply_geodata")
     for msg in consumer:
+        print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
         print("Supplying with additional geodata. The event had the message = {}".format(json.loads(msg.value)))
 
         with grpc.insecure_channel("localhost:9999") as channel:
@@ -27,6 +28,7 @@ if __name__ == "__main__":
                 response = stub.pluginSupplyGeodata(mads_pb2.PluginSupplyGeodataRequest(oid = objid, geodata = "DR Congo, Bumba"))
                 print("I just received a response on supllying geodata: ")
                 print(response)
+                print("")
                 channel.unsubscribe(channel.unsubscribe)
                 #
 

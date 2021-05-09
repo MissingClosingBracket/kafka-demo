@@ -27,9 +27,19 @@ message Object {
     string URI = 2;
 }
 
+//TagType:
+enum TagType {
+    EXIF = 0;
+    GEODATA = 1;
+    DESCR = 2;
+    TRANSL_DESCR = 3;
+}
+
 //Tag message:
 message Tag {
     int64 tid = 1;
+    string value = 2;
+    TagType type = 3;
 }
 
 //Object create:

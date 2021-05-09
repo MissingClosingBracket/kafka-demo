@@ -16,18 +16,16 @@ producer = KafkaProducer(bootstrap_servers=['0.0.0.0:9092'],
                          value_serializer=json_serializer)
 
 #initialize database representation:
-object_table = {}                        #(oid, uri)         example: (1, "google.com/images/search=iceland+snow,top=1")    (int, varchar)
-tag_set_table = {}                       #(oid, tsid)        example: (1,2)                                                 (int, int)
-tag_table = {}                           #(tid, tsid)        example: (23, 2)                                               (int, int)
-exif_tag_table = {}                      #(tid, coord)       example: (23, "12.3433535, 34.3429385")                        (int, varchar)
-description_tag_table = {}               #(tid, descr)       example: (24, "Three people in the woods") (auto-generated)    (int, varchar)
-translated_description_tag_table = {}    #(tid, descr)       example: (24, "Tveir menn ganga í skóginum.") (auto-generated) (int, varchar)
-geodata_tag_table = {}                   #(tid, geodata)     example: (25, "Vexö, Sverige. Malleby Forest.")                (int, varchar)
+object_table = {}                        #(oid, uri)                                  example: (1, "google.com/images/search=iceland+snow,top=1")                     
+tag_set_table = {}                       #(oid, tsid)                                 example: (1, 2)                                                                  
+tag_to_tagset_table = {}                 #(tid, tsid)                                 example: (23, 2)                                                                
+tag_table = {}                           #(tid, [type, coord/descr/descr/geodata])    example: (23, ["exif", "12.3433535, 34.3429385"])                                    
 
 #entries in database:
 object_table[0] = 0
 tag_set_table[0] = 0
-tag_table[0] = 0
+tag_to_tagset_table[0] = 0
+tag_table[0] = ["",""]
 
 
 
@@ -39,12 +37,15 @@ def kafka_event(topic, message):
 
 #get tags bu object id:
 def getTagsByOID(oid):
-    lst = []
-    tsid = tag_set_table[oid]
-    for key, value in tag_table.items():
-        if  value == tsid:
-            lst.append(key)
-    return lst
+    if oid >= len(object_table) or oid == 0:
+        return []
+    else:    
+        lst = []
+        tsid = tag_set_table[oid]
+        for key, value in tag_to_tagset_table.items():
+            if value == tsid:
+                lst.append(key)
+        return lst
 
 #define gRPC calls:
 class Listener(mads_pb2_grpc.mads_serviceServicer):
@@ -52,7 +53,9 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
     #increase index in object table and tagset table when new object gets added. 
     def userCreateObject(self, request, context):
         uri = request.URI
+        print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
         print("Server received new object: " + uri)
+        print("")
         oid = len(object_table) 
         tsid = len(tag_set_table) 
         object_table[oid] = uri
@@ -65,59 +68,76 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
         oid = request.oid
         uri = request.URI
         descr = request.description
+        print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
         print("Server received description for the object: oid = " + str(oid) + " with the URI = " + uri + ". The description is: " + descr)
+        print("")
         tsid = tag_set_table[oid]
         tid = len(tag_table) 
-        tag_table[tid] = tsid
-        description_tag_table[tid] = descr
+        tag_to_tagset_table[tid] = tsid
+        tag_table[tid] = ["descr", descr]
         kafka_event("event_auto_description_created", {"oid":oid, "tid":tid, "description":descr})
-        return mads_pb2.PluginCreateDescriptionResponse(tag = mads_pb2.Tag(tid = tid))
+        return mads_pb2.PluginCreateDescriptionResponse(tag = mads_pb2.Tag(tid = tid, value = descr, type = mads_pb2.TagType.DESCR))
 
     #the plugin for translating an automatically created description into the language of the user when reading the event: event_auto_description_created.
     def pluginTranslateDescription(self, request, context):
         oid = request.oid
         descr = request.description
+        print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
         print("Server received a translated description for the object: oid = " + str(oid) + ". The translated description is: " + descr) 
+        print("")
         tsid = tag_set_table[oid]
         tid = len(tag_table)
-        tag_table[tid] = tsid
-        translated_description_tag_table[tid] = descr
+        tag_to_tagset_table[tid] = tsid
+        tag_table[tid] = ["transl_descr", descr]
         kafka_event("event_translated_auto_description", {"oid":oid, "tid":tid, "description":descr})
-        return mads_pb2.PluginTranslateDescriptionResponse(tag = mads_pb2.Tag(tid = tid))
+        return mads_pb2.PluginTranslateDescriptionResponse(tag = mads_pb2.Tag(tid = tid, value = descr, type = mads_pb2.TagType.TRANSL_DESCR))
 
     #the plugin for extracting exif data from an object.
     def pluginExtractExifData(self, request, context):
         oid = request.oid
         lat = request.latitude
         lon = request.longitude
+        print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
         print("Server received extracted EXIF data from the object: oid = " + str(oid) + ". The latitude and longitude (lat, long) is: (" + str(lat) + ", " + str(lon) + ").")   
+        print("")
         tsid = tag_set_table[oid]
         tid = len(tag_table)
-        tag_table[tid] = tsid
-        exif_tag_table[tid] = [lat,lon]
+        tag_to_tagset_table[tid] = tsid
+        tag_table[tid] = ["exif", "(" + str(lat) + ", " + str(lon) + ")"]
         kafka_event("event_exif_data_extracted", {"oid":oid, "tid":tid, "latitude":lat, "longitude":lon})
-        return mads_pb2.PluginExtractExifDataResponse(tag = mads_pb2.Tag(tid = tid))
+        v = "(" + str(lat) + ", " + str(lon) + ")"
+        return mads_pb2.PluginExtractExifDataResponse(tag = mads_pb2.Tag(tid = tid, value = v, type = mads_pb2.TagType.EXIF))
 
     #the plugin that supplies additional geodate when reading event: event_exif_data_extracted.
     def pluginSupplyGeodata(self, request, context):
         oid = request.oid
         geodata = request.geodata
+        print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
         print("Server received additional geodata for the object: oid = " + str(oid) + ". The geodata received is: " + geodata)    
+        print("")
         tsid = tag_set_table[oid]
         tid = len(tag_table)
-        tag_table[tid] = tsid
-        geodata_tag_table[tid] = geodata
+        tag_to_tagset_table[tid] = tsid
+        tag_table[tid] = ["geodata", geodata]
         kafka_event("event_geodata_supplied", {"oid":oid, "tid":tid, "geodata":geodata})
-        return mads_pb2.PluginSupplyGeodataResponse(tag = mads_pb2.Tag(tid = tid))
+        return mads_pb2.PluginSupplyGeodataResponse(tag = mads_pb2.Tag(tid = tid, value = geodata, type = mads_pb2.TagType.GEODATA))
 
     #the user/program wants to retrieve all tags associated with an object:
     def userRequestsTagsForObject(self, request, context):
         oid = request.oid
+        print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
         print("Server received a request for giving the client all tags associated with the object: oid = " + str(oid) + ".")
         tags = getTagsByOID(oid)
-        for t in tags:
-            yield mads_pb2.UserRequestsTagsForObjectResponse(tag = mads_pb2.Tag(tid = t))
-
+        if (len(tags) == 0):
+            print("  --Server has no tags to return because oid does not exist.")
+            print("")
+        else:
+            for tagid in tags:
+                elem1 = tag_table[tagid][0]
+                elem2 = tag_table[tagid][1]
+                print("  --Server is returning: " + str(elem1) + ", " + str(elem2) + ".")
+                yield mads_pb2.UserRequestsTagsForObjectResponse(tag = mads_pb2.Tag(tid = tagid, value = str(elem2), type = mads_pb2.TagType.DESCR))
+            print("")
 #define server:
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
@@ -127,7 +147,7 @@ def serve():
     try:
         while True:
             print("Server Running : threadcount %i" % (threading.active_count()))
-            time.sleep(30)
+            time.sleep(60)
     except KeyboardInterrupt:
         print("KeyboardInterrupt")
         server.stop(0)

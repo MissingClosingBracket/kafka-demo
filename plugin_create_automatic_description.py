@@ -15,6 +15,7 @@ if __name__ == "__main__":
         group_id="description-1")
     print("Starting the consumer: plugin_create_automatic_description")
     for msg in consumer:
+        print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
         print("Creating descritpion for an object. The event had the message = {}".format(json.loads(msg.value)))
 
         with grpc.insecure_channel("localhost:9999") as channel:
@@ -26,6 +27,7 @@ if __name__ == "__main__":
                 response = stub.pluginCreateDescription(mads_pb2.PluginCreateDescriptionRequest(oid = objid, URI = uri, description = "Two people walking in the woods."))
                 print("I just received a response on adding a description to an object: ")
                 print(response)
+                print("")
                 channel.unsubscribe(channel.unsubscribe)
                 #
 
