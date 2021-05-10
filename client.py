@@ -2,7 +2,6 @@ import time
 import grpc
 import mads_pb2
 import mads_pb2_grpc
-import time
 
 #make client do a gRPC
 def run():
