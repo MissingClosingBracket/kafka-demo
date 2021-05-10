@@ -60,7 +60,7 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
         tsid = len(tag_set_table) 
         object_table[oid] = uri
         tag_set_table[oid] = tsid
-        kafka_event("event_newObject",{"oid":oid,"uri":uri})
+        kafka_event("event_new_object",{"oid":oid,"uri":uri})
         return mads_pb2.UserCreateObjectResponse(object = mads_pb2.Object(oid = oid, URI = uri))
 
     #the plugin for automatically creating a description to an object.     
@@ -132,7 +132,7 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
             yield mads_pb2.UserRequestsTagsForObjectResponse()
             print("")
         else:
-            kafka_event("user_requests_tags", {"oid":oid})
+            kafka_event("event_user_requests_tags", {"oid":oid})
             for tagid in tags:
                 elem1 = tag_table[tagid][0]
                 elem2 = tag_table[tagid][1]
@@ -158,7 +158,7 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
             print("")
             return mads_pb2.UserRequestsTagsForObjectResponse()
         else:    
-            kafka_event("user_changes_tag", {"tid":tid, "value": new_value})
+            kafka_event("event_user_changes_tag", {"tid":tid, "value": new_value})
             t = tag_table[tid]
             tagtype = t[0]  
             tag_table[tid] = [tagtype, new_value]

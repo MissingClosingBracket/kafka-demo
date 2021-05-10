@@ -9,7 +9,7 @@ import mads_pb2_grpc
 if __name__ == "__main__":
 
     consumer = KafkaConsumer(
-        "event_newObject",
+        "event_new_object",
         bootstrap_servers='0.0.0.0:9092',
         auto_offset_reset='latest',
         group_id="exif-1")
