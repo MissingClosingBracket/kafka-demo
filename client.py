@@ -13,7 +13,7 @@ def run():
             if (cl_in == "new_object"):
                 try:
                     #Add a picture to the system:
-                    response = stub.userCreateObject(mads_pb2.UserCreateObjectRequest(URI = "test_uri"))
+                    response = stub.userCreateObject(mads_pb2.UserCreateObjectRequest(URI = "www.imageofpeopleinthewoods.com"))
                     print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
                     print("I just received a response on adding an object to the system: (object) =")
                     print(response)

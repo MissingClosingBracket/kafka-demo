@@ -22,9 +22,8 @@ if __name__ == "__main__":
             stub = mads_pb2_grpc.mads_serviceStub(channel)
             try:
                 objid = int(json.loads(msg.value)['oid'])
-                uri = str(json.loads(msg.value)['uri'])
                 #extract exif data from object:
-                response = stub.pluginExtractExifData(mads_pb2.PluginExtractExifDataRequest(oid = objid, URI = uri, latitude = 2.34324, longitude = 23.02423))
+                response = stub.pluginExtractExifData(mads_pb2.PluginExtractExifDataRequest(oid = objid, latitude = 2.34324, longitude = 23.02423))
                 print("I just received a response on extracting EXIF data from an object: ")
                 print(response)
                 print("")

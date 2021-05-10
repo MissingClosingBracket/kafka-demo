@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\nmads.proto\"\"\n\x06Object\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0b\n\x03URI\x18\x02 \x01(\t\"9\n\x03Tag\x12\x0b\n\x03tid\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\t\x12\x16\n\x04type\x18\x03 \x01(\x0e\x32\x08.TagType\"&\n\x17UserCreateObjectRequest\x12\x0b\n\x03URI\x18\x01 \x01(\t\"3\n\x18UserCreateObjectResponse\x12\x17\n\x06object\x18\x01 \x01(\x0b\x32\x07.Object\"O\n\x1ePluginCreateDescriptionRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0b\n\x03URI\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\"4\n\x1fPluginCreateDescriptionResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\"E\n!PluginTranslateDescriptionRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\"7\n\"PluginTranslateDescriptionResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\"]\n\x1cPluginExtractExifDataRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0b\n\x03URI\x18\x02 \x01(\t\x12\x10\n\x08latitude\x18\x03 \x01(\x02\x12\x11\n\tlongitude\x18\x04 \x01(\x02\"2\n\x1dPluginExtractExifDataResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\":\n\x1aPluginSupplyGeodataRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0f\n\x07geodata\x18\x02 \x01(\t\"0\n\x1bPluginSupplyGeodataResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\"/\n UserRequestsTagsForObjectRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\"6\n!UserRequestsTagsForObjectResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\"2\n\x14UserChangeTagRequest\x12\x0b\n\x03tid\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\t\"*\n\x15UserChangeTagResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag*Q\n\x07TagType\x12\x0e\n\nNOT_IN_USE\x10\x00\x12\x0b\n\x07GEODATA\x10\x01\x12\t\n\x05\x44\x45SCR\x10\x02\x12\x10\n\x0cTRANSL_DESCR\x10\x03\x12\x0c\n\x08\x45XIFDATA\x10\x04\x32\xec\x04\n\x0cmads_service\x12G\n\x10userCreateObject\x12\x18.UserCreateObjectRequest\x1a\x19.UserCreateObjectResponse\x12\\\n\x17pluginCreateDescription\x12\x1f.PluginCreateDescriptionRequest\x1a .PluginCreateDescriptionResponse\x12\x65\n\x1apluginTranslateDescription\x12\".PluginTranslateDescriptionRequest\x1a#.PluginTranslateDescriptionResponse\x12V\n\x15pluginExtractExifData\x12\x1d.PluginExtractExifDataRequest\x1a\x1e.PluginExtractExifDataResponse\x12P\n\x13pluginSupplyGeodata\x12\x1b.PluginSupplyGeodataRequest\x1a\x1c.PluginSupplyGeodataResponse\x12\x64\n\x19userRequestsTagsForObject\x12!.UserRequestsTagsForObjectRequest\x1a\".UserRequestsTagsForObjectResponse0\x01\x12>\n\ruserChangeTag\x12\x15.UserChangeTagRequest\x1a\x16.UserChangeTagResponseb\x06proto3'
+  serialized_pb=b'\n\nmads.proto\"\"\n\x06Object\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0b\n\x03URI\x18\x02 \x01(\t\"9\n\x03Tag\x12\x0b\n\x03tid\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\t\x12\x16\n\x04type\x18\x03 \x01(\x0e\x32\x08.TagType\"&\n\x17UserCreateObjectRequest\x12\x0b\n\x03URI\x18\x01 \x01(\t\"3\n\x18UserCreateObjectResponse\x12\x17\n\x06object\x18\x01 \x01(\x0b\x32\x07.Object\"B\n\x1ePluginCreateDescriptionRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\"4\n\x1fPluginCreateDescriptionResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\"E\n!PluginTranslateDescriptionRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\"7\n\"PluginTranslateDescriptionResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\"P\n\x1cPluginExtractExifDataRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x10\n\x08latitude\x18\x02 \x01(\x02\x12\x11\n\tlongitude\x18\x03 \x01(\x02\"2\n\x1dPluginExtractExifDataResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\":\n\x1aPluginSupplyGeodataRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\x12\x0f\n\x07geodata\x18\x02 \x01(\t\"0\n\x1bPluginSupplyGeodataResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\"/\n UserRequestsTagsForObjectRequest\x12\x0b\n\x03oid\x18\x01 \x01(\x03\"6\n!UserRequestsTagsForObjectResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag\"2\n\x14UserChangeTagRequest\x12\x0b\n\x03tid\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\t\"*\n\x15UserChangeTagResponse\x12\x11\n\x03tag\x18\x01 \x01(\x0b\x32\x04.Tag*Q\n\x07TagType\x12\x0e\n\nNOT_IN_USE\x10\x00\x12\x0b\n\x07GEODATA\x10\x01\x12\t\n\x05\x44\x45SCR\x10\x02\x12\x10\n\x0cTRANSL_DESCR\x10\x03\x12\x0c\n\x08\x45XIFDATA\x10\x04\x32\xec\x04\n\x0cmads_service\x12G\n\x10userCreateObject\x12\x18.UserCreateObjectRequest\x1a\x19.UserCreateObjectResponse\x12\\\n\x17pluginCreateDescription\x12\x1f.PluginCreateDescriptionRequest\x1a .PluginCreateDescriptionResponse\x12\x65\n\x1apluginTranslateDescription\x12\".PluginTranslateDescriptionRequest\x1a#.PluginTranslateDescriptionResponse\x12V\n\x15pluginExtractExifData\x12\x1d.PluginExtractExifDataRequest\x1a\x1e.PluginExtractExifDataResponse\x12P\n\x13pluginSupplyGeodata\x12\x1b.PluginSupplyGeodataRequest\x1a\x1c.PluginSupplyGeodataResponse\x12\x64\n\x19userRequestsTagsForObject\x12!.UserRequestsTagsForObjectRequest\x1a\".UserRequestsTagsForObjectResponse0\x01\x12>\n\ruserChangeTag\x12\x15.UserChangeTagRequest\x1a\x16.UserChangeTagResponseb\x06proto3'
 )
 
 _TAGTYPE = _descriptor.EnumDescriptor(
@@ -58,8 +58,8 @@ _TAGTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=923,
-  serialized_end=1004,
+  serialized_start=897,
+  serialized_end=978,
 )
 _sym_db.RegisterEnumDescriptor(_TAGTYPE)
 
@@ -237,15 +237,8 @@ _PLUGINCREATEDESCRIPTIONREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='URI', full_name='PluginCreateDescriptionRequest.URI', index=1,
+      name='description', full_name='PluginCreateDescriptionRequest.description', index=1,
       number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='description', full_name='PluginCreateDescriptionRequest.description', index=2,
-      number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -263,7 +256,7 @@ _PLUGINCREATEDESCRIPTIONREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=202,
-  serialized_end=281,
+  serialized_end=268,
 )
 
 
@@ -294,8 +287,8 @@ _PLUGINCREATEDESCRIPTIONRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=283,
-  serialized_end=335,
+  serialized_start=270,
+  serialized_end=322,
 )
 
 
@@ -333,8 +326,8 @@ _PLUGINTRANSLATEDESCRIPTIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=337,
-  serialized_end=406,
+  serialized_start=324,
+  serialized_end=393,
 )
 
 
@@ -365,8 +358,8 @@ _PLUGINTRANSLATEDESCRIPTIONRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=408,
-  serialized_end=463,
+  serialized_start=395,
+  serialized_end=450,
 )
 
 
@@ -386,22 +379,15 @@ _PLUGINEXTRACTEXIFDATAREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='URI', full_name='PluginExtractExifDataRequest.URI', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='latitude', full_name='PluginExtractExifDataRequest.latitude', index=2,
-      number=3, type=2, cpp_type=6, label=1,
+      name='latitude', full_name='PluginExtractExifDataRequest.latitude', index=1,
+      number=2, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='longitude', full_name='PluginExtractExifDataRequest.longitude', index=3,
-      number=4, type=2, cpp_type=6, label=1,
+      name='longitude', full_name='PluginExtractExifDataRequest.longitude', index=2,
+      number=3, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -418,8 +404,8 @@ _PLUGINEXTRACTEXIFDATAREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=465,
-  serialized_end=558,
+  serialized_start=452,
+  serialized_end=532,
 )
 
 
@@ -450,8 +436,8 @@ _PLUGINEXTRACTEXIFDATARESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=560,
-  serialized_end=610,
+  serialized_start=534,
+  serialized_end=584,
 )
 
 
@@ -489,8 +475,8 @@ _PLUGINSUPPLYGEODATAREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=612,
-  serialized_end=670,
+  serialized_start=586,
+  serialized_end=644,
 )
 
 
@@ -521,8 +507,8 @@ _PLUGINSUPPLYGEODATARESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=672,
-  serialized_end=720,
+  serialized_start=646,
+  serialized_end=694,
 )
 
 
@@ -553,8 +539,8 @@ _USERREQUESTSTAGSFOROBJECTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=722,
-  serialized_end=769,
+  serialized_start=696,
+  serialized_end=743,
 )
 
 
@@ -585,8 +571,8 @@ _USERREQUESTSTAGSFOROBJECTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=771,
-  serialized_end=825,
+  serialized_start=745,
+  serialized_end=799,
 )
 
 
@@ -624,8 +610,8 @@ _USERCHANGETAGREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=827,
-  serialized_end=877,
+  serialized_start=801,
+  serialized_end=851,
 )
 
 
@@ -656,8 +642,8 @@ _USERCHANGETAGRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=879,
-  serialized_end=921,
+  serialized_start=853,
+  serialized_end=895,
 )
 
 _TAG.fields_by_name['type'].enum_type = _TAGTYPE
@@ -808,8 +794,8 @@ _MADS_SERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1007,
-  serialized_end=1627,
+  serialized_start=981,
+  serialized_end=1601,
   methods=[
   _descriptor.MethodDescriptor(
     name='userCreateObject',

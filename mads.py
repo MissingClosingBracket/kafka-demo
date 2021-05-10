@@ -66,10 +66,9 @@ class Listener(mads_pb2_grpc.mads_serviceServicer):
     #the plugin for automatically creating a description to an object.     
     def pluginCreateDescription(self, request, context):
         oid = request.oid
-        uri = request.URI
         descr = request.description
         print("--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--")
-        print("Server received description for the object: oid = " + str(oid) + " with the URI = " + uri + ". The description is: " + descr)
+        print("Server received description for the object: oid = " + str(oid) + ". The description is: " + descr)
         print("")
         tsid = tag_set_table[oid]
         tid = len(tag_table) 

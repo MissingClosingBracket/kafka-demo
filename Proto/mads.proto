@@ -58,8 +58,7 @@ message UserCreateObjectResponse {
 //Create automatic description:
 message PluginCreateDescriptionRequest {
     int64 oid = 1;
-    string URI = 2;
-    string description = 3;
+    string description = 2;
 }
 
 message PluginCreateDescriptionResponse {
@@ -79,9 +78,8 @@ message PluginTranslateDescriptionResponse {
 //Extract EXIF data:
 message PluginExtractExifDataRequest {
     int64 oid = 1;
-    string URI = 2;
-    float latitude = 3;
-    float longitude = 4;
+    float latitude = 2;
+    float longitude = 3;
 }
 
 message PluginExtractExifDataResponse {
