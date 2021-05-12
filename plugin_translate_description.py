@@ -8,6 +8,9 @@ import mads_pb2_grpc
 
 if __name__ == "__main__":
 
+    def translateDescription(description):
+        return "To personer i skoven."
+
     consumer = KafkaConsumer(
         "event_auto_description_created",
         bootstrap_servers='0.0.0.0:9092',
@@ -24,7 +27,8 @@ if __name__ == "__main__":
                 objid = int(json.loads(msg.value)['oid'])
                 descr = str(json.loads(msg.value)['description'])
                 #create translated description for object:
-                response = stub.pluginTranslateDescription(mads_pb2.PluginTranslateDescriptionRequest(oid = objid, description = "To personer i skoven."))
+                translated_description = translateDescription(descr)
+                response = stub.pluginTranslateDescription(mads_pb2.PluginTranslateDescriptionRequest(oid = objid, description = translated_description))
                 print("I just received a response on translating a description: ")
                 print(response)
                 print("")

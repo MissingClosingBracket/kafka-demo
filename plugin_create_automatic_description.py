@@ -8,6 +8,9 @@ import mads_pb2_grpc
 
 if __name__ == "__main__":
 
+    def getDescription(uri):
+        return "Two people in the woods"
+
     consumer = KafkaConsumer(
         "event_new_object",
         bootstrap_servers='0.0.0.0:9092',
@@ -22,8 +25,10 @@ if __name__ == "__main__":
             stub = mads_pb2_grpc.mads_serviceStub(channel)
             try:
                 objid = int(json.loads(msg.value)['oid'])
+                uri = json.loads(msg.value)['uri']
                 #create description for object:
-                response = stub.pluginCreateDescription(mads_pb2.PluginCreateDescriptionRequest(oid = objid, description = "Two people in the woods."))
+                auto_description = getDescription(uri)
+                response = stub.pluginCreateDescription(mads_pb2.PluginCreateDescriptionRequest(oid = objid, description = auto_description))
                 print("I just received a response on adding a description to an object: ")
                 print(response)
                 print("")

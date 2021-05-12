@@ -8,6 +8,9 @@ import mads_pb2_grpc
 
 if __name__ == "__main__":
 
+    def getGeodata(lat, lon):
+        return "DR Congo, Bumba"
+
     consumer = KafkaConsumer(
         "event_exif_data_extracted",
         bootstrap_servers='0.0.0.0:9092',
@@ -25,8 +28,9 @@ if __name__ == "__main__":
                 lat = float(json.loads(msg.value)['latitude'])
                 lon = float(json.loads(msg.value)['longitude'])
                 #supply additional geodata for object:
-                response = stub.pluginSupplyGeodata(mads_pb2.PluginSupplyGeodataRequest(oid = objid, geodata = "DR Congo, Bumba"))
-                print("I just received a response on supllying geodata: ")
+                data = getGeodata(lat, lon)
+                response = stub.pluginSupplyGeodata(mads_pb2.PluginSupplyGeodataRequest(oid = objid, geodata = data))
+                print("I just received a response on supplying geodata: ")
                 print(response)
                 print("")
                 channel.unsubscribe(channel.unsubscribe)
