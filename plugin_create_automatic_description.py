@@ -8,6 +8,7 @@ import mads_pb2_grpc
 
 if __name__ == "__main__":
 
+    #simulate call to aut. image annotation
     def getDescription(uri):
         return "Two people in the woods"
 
