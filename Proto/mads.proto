@@ -24,7 +24,7 @@ service mads_service {
     rpc userChangeTag (UserChangeTagRequest) returns (UserChangeTagResponse);
 }
 
-//Object type::
+//Object type:
 message Object {
     int64 oid = 1;
     string URI = 2;
