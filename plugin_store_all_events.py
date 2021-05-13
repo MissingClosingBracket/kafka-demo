@@ -12,7 +12,7 @@ if __name__ == "__main__":
     print("Starting the consumer: plugin_store_all_events")
     #open file. Also test file, even though may not be use (open/close actions take time)
     log_file = open("log_file.txt", "w")
-    test_file = open(r"/home/christian/repos/kafka-demo/test/test_03.out", "w")
+    test_file = open(r"/home/christian/repos/objectcube_test_system/test/test_03.out", "w")
     for msg in consumer:
         print("Storing an event. The event had the message = {}".format(json.loads(msg.value)))
         log_file.write(json.dumps(json.loads(msg.value)) + "\n")
