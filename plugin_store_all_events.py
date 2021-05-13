@@ -1,7 +1,6 @@
 from kafka import KafkaConsumer
 import json
 
-all_events = []
 write_to_test_file = False
 
 if __name__ == "__main__":
@@ -16,7 +15,6 @@ if __name__ == "__main__":
     test_file = open(r"/home/christian/repos/kafka-demo/test/test_03.out", "w")
     for msg in consumer:
         print("Storing an event. The event had the message = {}".format(json.loads(msg.value)))
-        all_events.append(msg)
         log_file.write(json.dumps(json.loads(msg.value)) + "\n")
         if (write_to_test_file):
             test_file.write(json.dumps(json.loads(msg.value)) + "\n")
