@@ -20,13 +20,13 @@
 // Set up kafka producer and consumers (plugins)
     Now, run a producer (mads). mads is both a gRPC server and a kafka producer. 
     Go into this directory 
-        cd /repos/kafka-demo/mads/
+        cd /repos/objectcube_test_system/mads/
     and run:
         python3 mads.py  
 
     Now that the servers are running, we can start up one or more consumers listening to topics.
     Go into this directory 
-        cd /repos/kafka-demo
+        cd /repos/objectcube_test_system
     and run:
         python3 <plugin>.py    
         (...)
@@ -53,7 +53,7 @@
 
 //For testing:
     run in client and choose the test file. Also set bool value in plugin_store_all_data to True and select proper .out-file
-    python3 client.py < /home/christian/repos/kafka-demo/test/test_03.in
+    python3 client.py < /home/christian/repos/objectcube_test_system/test/test_03.in
 //
 
     
