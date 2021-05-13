@@ -1,0 +1,7 @@
+{"oid": 1, "uri": "www.imageofpeopleinthewoods.com", "topic": "event_new_object"}
+{"oid": 1, "tid": 1, "description": "Two people in the woods", "topic": "event_auto_description_created"}
+{"oid": 1, "tid": 2, "latitude": 2.3432400226593018, "longitude": 23.024229049682617, "topic": "event_exif_data_extracted"}
+{"oid": 1, "tid": 3, "description": "To personer i skoven.", "topic": "event_translated_auto_description"}
+{"oid": 1, "tid": 4, "geodata": "DR Congo, Bumba", "topic": "event_geodata_supplied"}
+{"oid": 1, "topic": "event_user_requests_tags"}
+{"tid": 3, "value": "Tre personer i skoven", "topic": "event_user_changes_tag"}
