@@ -51,4 +51,9 @@
     rm -rf /tmp/kafka-logs /tmp/zookeeper
 //
 
+//For testing:
+    run in client and choose the test file. Also set bool value in plugin_store_all_data to True and select proper .out-file
+    python3 client.py < /home/christian/repos/kafka-demo/test/test_03.in
+//
+
     
