@@ -53,7 +53,11 @@
 
 //For testing:
     run in client and choose the test file. Also set bool value in plugin_store_all_data to True and select proper .out-file
-    python3 client.py < /home/christian/repos/objectcube_test_system/test/test_03.in
+        python3 client.py < /home/christian/repos/objectcube_test_system/test/test_03.in
+
+    In the test folder, find the unit_test.py file and run it. 
+    It asserts total number of events to the expected number of events. 
+    Right now, test_02 fails. This is due to asynchronious build of system.
 //
 
     
